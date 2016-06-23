@@ -1,19 +1,19 @@
 body {
-    font-size: 2em;
+    font-size: 1.0em;
     font-family: sans-serif;
 }
 
 #singleLineCode {
-    font-size: 1.2em;
+    font-size: 1.0em;
     width: 90%;
 }
 
 .largeTextButton {
-    font-size: 1.5em;
+    font-size: 1.0em;
 }
 
 .smallTextButton {
-    font-size: 0.8em;
+    font-size: 0.6em;
 }
 
 .keypadRow {
@@ -26,8 +26,8 @@ body {
 }
 
 .keypadButton {
-    width: 19vw;
-    height: 19vw;
+    width: 16vw;
+    height: 16vw;
 
     border: 1px solid #999;
     float: left;
@@ -37,9 +37,9 @@ body {
 }
 
 #bs-console {
-    font-size: 2em;
+    font-size: 1.0em;
 }
 
 .credits {
-    font-size: 0.7em;
+    font-size: 0.5em;
 }
