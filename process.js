@@ -88,6 +88,6 @@ addClickListener("subtract", "- ");
 addClickListener("add", "+ ");
 
 addClickListener("sqrt", "sqrt ");
-addClickListener("expt", "expt ");
+// addClickListener("expt", "expt ");
 addClickListener("log", "log ");
 addClickListener("exp", "exp ");
