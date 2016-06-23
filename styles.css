@@ -1,19 +1,19 @@
 body {
-    font-size: 1.0em;
+    font-size: 1.4em;
     font-family: sans-serif;
 }
 
 #singleLineCode {
-    font-size: 1.0em;
+    font-size: 1.2em;
     width: 90%;
 }
 
 .largeTextButton {
-    font-size: 1.0em;
+    font-size: 1.2em;
 }
 
 .smallTextButton {
-    font-size: 0.6em;
+    font-size: 0.7em;
 }
 
 .keypadRow {
@@ -36,8 +36,25 @@ body {
     align-items: center;
 }
 
+#keypad {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #999;
+}
+
+
+.tableKeypadButton {
+    width: 16vw;
+    height: 16vw;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
 #bs-console {
-    font-size: 1.0em;
+    font-size: 1.4em;
 }
 
 .credits {
