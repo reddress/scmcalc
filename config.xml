@@ -19,5 +19,5 @@
 
   <platform name="android" />
 
-  <preference name="android-windowSoftInputMode" value="stateHidden" />
+  <preference name="android-windowSoftInputMode" value="stateAlwaysHidden" />
 </widget>

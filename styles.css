@@ -28,9 +28,9 @@ body {
 .keypadButton {
     width: 16vw;
     height: 16vw;
+    float: left;
 
     border: 1px solid #999;
-    float: left;
     display: flex;
     justify-content: center;
     align-items: center;
