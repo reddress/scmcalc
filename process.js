@@ -4,21 +4,43 @@ var intp = new BiwaScheme.Interpreter();
 intp.evaluate("(define (gcd a b) (if (= b 0) a (gcd b (mod a b))))");
 intp.evaluate("(define (lcm a b) (/ (* a b) (gcd a b)))");
 
+// custom print
+intp.evaluate("(define (interleave-sep sep args) (if (null? args) '() (cons (car args) (cons sep (interleave-sep sep (cdr args))))))");
+intp.evaluate("(define (butlast lst) (reverse (cdr (reverse lst))))");
+intp.evaluate('(define (print-many . args) (apply print (butlast (interleave-sep ", " args))))');
+
+// listen for Enter on input
+$("#singleLineCode").keyup(function (e) {
+  if (e.keyCode == 13) {
+    $("#eval").click();
+  } else if (e.keyCode == 27) {
+    $("#clear").click();
+  }  
+});
+
+function discardLeftOfParen(str) {
+  return str.substring(str.indexOf("("));
+}
+
 document.getElementById("clear").addEventListener("click", function () {
   flash("clear");
   document.getElementById("singleLineCode").value = "";
   document.getElementById("bs-console").innerHTML = "0";
+  document.getElementById("singleLineCode").focus();
 });
 
 document.getElementById("eval").addEventListener("click", function () {
   flash("eval");
   var bsConsole = document.getElementById("bs-console");
 
+  var inputElem = document.getElementById("singleLineCode");
+
+  // inputElem.value = discardLeftOfParen(inputElem.value);
   bsConsole.innerHTML = "";
-  intp.evaluate("(print " + document.getElementById("singleLineCode").value + ")");
+  intp.evaluate("(print-many " + inputElem.value + ')');
 
   if (bsConsole.innerHTML === "") {
-    bsConsole.innerHTML = "error";
+    bsConsole.innerHTML = "Error: please revise your input";
   }
 });
 
@@ -109,3 +131,8 @@ addClickListener("expt", "(expt ");
 addClickListener("log", "(log ");
 addClickListener("exp", "(exp ");
 addClickListener("lcm", "(lcm ");
+
+function runDemo() {
+  $("#singleLineCode").val("(* (- 98.6 32) (/ 5 9))");
+  $("#eval").click();
+}
