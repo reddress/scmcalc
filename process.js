@@ -66,7 +66,7 @@ function addToInput(str) {
 
 function addClickListener(id, str) {
   document.getElementById(id).addEventListener("click", function () {
-    document.getElementById("lastPressed").innerHTML = id;
+    // document.getElementById("lastPressed").innerHTML = id;
     flash(id);
     addToInput(str);
   });
