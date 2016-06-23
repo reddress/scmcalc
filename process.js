@@ -1,10 +1,13 @@
 var intp = new BiwaScheme.Interpreter();
 
 document.getElementById("clear").addEventListener("click", function () {
+  flash("clear");
   document.getElementById("singleLineCode").value = "";
+  document.getElementById("bs-console").innerHTML = "0";
 });
 
 document.getElementById("eval").addEventListener("click", function () {
+  flash("eval");
   var bsConsole = document.getElementById("bs-console");
 
   bsConsole.innerHTML = "";
@@ -16,6 +19,7 @@ document.getElementById("eval").addEventListener("click", function () {
 });
 
 document.getElementById("bksp").addEventListener("click", function () {
+  flash("bksp");
   var focused = document.getElementById("singleLineCode");
   var removedSelection = removeSelection();
   var caretPos = focused.selectionStart;
@@ -62,8 +66,17 @@ function addToInput(str) {
 
 function addClickListener(id, str) {
   document.getElementById(id).addEventListener("click", function () {
+    // document.getElementById("lastPressed").innerHTML = id;
+    flash(id);
     addToInput(str);
   });
+}
+
+function flash(id) {
+  document.getElementById(id).style.backgroundColor = "#BFF";
+  setTimeout(function () {
+    document.getElementById(id).style.backgroundColor = "#FFF";
+  }, 70);
 }
 
 addClickListener("one", "1");
@@ -88,6 +101,6 @@ addClickListener("subtract", "- ");
 addClickListener("add", "+ ");
 
 addClickListener("sqrt", "sqrt ");
-// addClickListener("expt", "expt ");
+addClickListener("expt", "expt ");
 addClickListener("log", "log ");
 addClickListener("exp", "exp ");
