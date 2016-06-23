@@ -77,7 +77,7 @@ function addClickListener(id, str) {
 }
 
 function flash(id) {
-  document.getElementById(id).style.backgroundColor = "#BFF";
+  document.getElementById(id).style.backgroundColor = "#EEF";
   setTimeout(function () {
     document.getElementById(id).style.backgroundColor = "#FFF";
   }, 70);

@@ -30,7 +30,7 @@ body {
     height: 16vw;
     float: left;
 
-    border: 1px solid #999;
+    border: 2px solid #CCF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@ body {
 }
 
 table, th, td {
-    border: 1px solid #999;
+    border: 2px solid #CCF;
 }
 
 
