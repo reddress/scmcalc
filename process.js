@@ -1,5 +1,9 @@
 var intp = new BiwaScheme.Interpreter();
 
+// gcd and lcm
+intp.evaluate("(define (gcd a b) (if (= b 0) a (gcd b (mod a b))))");
+intp.evaluate("(define (lcm a b) (/ (* a b) (gcd a b)))");
+
 document.getElementById("clear").addEventListener("click", function () {
   flash("clear");
   document.getElementById("singleLineCode").value = "";
@@ -11,7 +15,7 @@ document.getElementById("eval").addEventListener("click", function () {
   var bsConsole = document.getElementById("bs-console");
 
   bsConsole.innerHTML = "";
-  intp.evaluate("(print (" + document.getElementById("singleLineCode").value + "))");
+  intp.evaluate("(print " + document.getElementById("singleLineCode").value + ")");
 
   if (bsConsole.innerHTML === "") {
     bsConsole.innerHTML = "error";
@@ -91,16 +95,17 @@ addClickListener("nine", "9");
 addClickListener("zero", "0");
 addClickListener("dot", ".");
 
-addClickListener("leftParen", "(");
+// addClickListener("leftParen", "(");
 addClickListener("rightParen", ")");
 addClickListener("space", " ");
 
-addClickListener("divide", "/ ");
-addClickListener("multiply", "* ");
-addClickListener("subtract", "- ");
-addClickListener("add", "+ ");
+addClickListener("divide", "(/ ");
+addClickListener("multiply", "(* ");
+addClickListener("subtract", "(- ");
+addClickListener("add", "(+ ");
 
-addClickListener("sqrt", "sqrt ");
-addClickListener("expt", "expt ");
-addClickListener("log", "log ");
-addClickListener("exp", "exp ");
+addClickListener("sqrt", "(sqrt ");
+addClickListener("expt", "(expt ");
+addClickListener("log", "(log ");
+addClickListener("exp", "(exp ");
+addClickListener("lcm", "(lcm ");
