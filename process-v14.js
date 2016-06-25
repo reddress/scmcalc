@@ -20,18 +20,11 @@ function limitDecimals(str) {
 
 // listen for Enter on input
 $("#singleLineCode").keyup(function (e) {
-/*
   if (e.keyCode == 13) {
     $("#eval").click();
   } else if (e.keyCode == 27) {
     $("#clear").click();
   }  
-*/
-  if (e.keyCode == 27) {
-    $("#clear").click();
-  } else {
-    $("#eval").click();
-  }
 });
 
 function discardLeftOfParen(str) {
@@ -46,7 +39,7 @@ document.getElementById("clear").addEventListener("click", function () {
 });
 
 document.getElementById("eval").addEventListener("click", function () {
-  // flash("eval");
+  flash("eval");
   var bsConsole = document.getElementById("bs-console");
 
   var inputElem = document.getElementById("singleLineCode");
@@ -56,8 +49,7 @@ document.getElementById("eval").addEventListener("click", function () {
   intp.evaluate("(print-many " + inputElem.value + ')');
 
   if (bsConsole.innerHTML === "") {
-    // bsConsole.innerHTML = "Error: please revise your input";
-    bsConsole.innerHTML = "...";
+    bsConsole.innerHTML = "Error: please revise your input";
   } else {
     var consoleText = $(bsConsole).text();
     // limit decimals
@@ -123,7 +115,6 @@ function addClickListener(id, str) {
     // document.getElementById("lastPressed").innerHTML = id;
     flash(id);
     addToInput(str);
-    $("#eval").click();
   });
 }
 
@@ -165,7 +156,3 @@ function runDemo() {
   $("#singleLineCode").val("(* (- 98.6 32) (/ 5 9))");
   $("#eval").click();
 }
-
-$("#singleLineCode").change(function () {
-  $("#eval").click();
-});
