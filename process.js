@@ -1,8 +1,8 @@
 var intp = new BiwaScheme.Interpreter();
 
 // gcd and lcm
-intp.evaluate("(define (gcd a b) (if (= b 0) a (gcd b (mod a b))))");
-intp.evaluate("(define (lcm a b) (/ (* a b) (gcd a b)))");
+// intp.evaluate("(define (gcd a b) (if (= b 0) a (gcd b (mod a b))))");
+// intp.evaluate("(define (lcm a b) (/ (* a b) (gcd a b)))");
 
 // custom print
 intp.evaluate("(define (interleave-sep sep args) (if (null? args) '() (cons (car args) (cons sep (interleave-sep sep (cdr args))))))");
@@ -10,9 +10,15 @@ intp.evaluate("(define (butlast lst) (reverse (cdr (reverse lst))))");
 intp.evaluate('(define (print-many . args) (apply print (butlast (interleave-sep ";" args))))');
 
 function limitDecimals(str) {
+  var indexOfE = str.indexOf("e");
+  var exp = "";
+  if (indexOfE >= 0) {
+    exp = str.substring(indexOfE);
+  }
+  
   var indexOfPeriod = str.indexOf(".");
   if (indexOfPeriod >= 0) {
-    return str.substring(0, str.indexOf(".") + 5).trim();
+    return str.substring(0, str.indexOf(".") + 5).trim() + exp;
   } else {
     return str.trim();
   }
@@ -53,7 +59,11 @@ document.getElementById("eval").addEventListener("click", function () {
 
   // inputElem.value = discardLeftOfParen(inputElem.value);
   bsConsole.innerHTML = "";
-  intp.evaluate("(print-many " + inputElem.value + ')');
+  try {
+    intp.evaluate("(print-many " + inputElem.value + ')');
+  } catch (e) {
+    bsConsole.innerHTML = "";
+  }
 
   if (bsConsole.innerHTML === "") {
     // bsConsole.innerHTML = "Error: please revise your input";
@@ -85,6 +95,8 @@ document.getElementById("bksp").addEventListener("click", function () {
     newCaretPos = Math.max(0, caretPos - 1);
   }
   focused.setSelectionRange(newCaretPos, newCaretPos);
+
+  $("#eval").click();
 });
 
 function removeSelection() {
@@ -155,11 +167,26 @@ addClickListener("multiply", "(* ");
 addClickListener("subtract", "(- ");
 addClickListener("add", "(+ ");
 
-addClickListener("sqrt", "(sqrt ");
+// addClickListener("sqrt", "(sqrt ");
 addClickListener("expt", "(expt ");
 addClickListener("log", "(log ");
 addClickListener("exp", "(exp ");
-addClickListener("lcm", "(lcm ");
+// addClickListener("lcm", "(lcm ");
+
+// memory
+document.getElementById("save").addEventListener("click", function () {
+  var memoryElem = document.getElementById("memory");
+  var bsConsole = document.getElementById("bs-console");
+  
+  memoryElem.innerHTML = bsConsole.innerHTML;
+});
+
+document.getElementById("load").addEventListener("click", function () {
+  addToInput(" ");
+  addToInput(document.getElementById("memory").innerHTML);
+  addToInput(" ");
+  $("#eval").click();
+});
 
 function runDemo() {
   $("#singleLineCode").val("(* (- 98.6 32) (/ 5 9))");
